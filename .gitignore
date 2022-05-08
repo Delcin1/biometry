@@ -1,6 +1,5 @@
-!/runs
-!/runs/track
 /runs/track/*
+!/runs/track
 *.mp4
 *.avi
 *.mov
