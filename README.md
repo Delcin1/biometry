@@ -1,4 +1,4 @@
-git clone --recurse-submodules https://github.com/DelcinNikita/biometry_tracking.git
+git clone --recurse-submodules https://gitlab.com/DelcinNikita/biometry.git
 
 If you already cloned and forgot to use --recurse-submodules you can run git submodule update --init
 
