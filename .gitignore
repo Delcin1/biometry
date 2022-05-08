@@ -1,4 +1,4 @@
-/runs/track/exp*
+/runs/track/*
 *.mp4
 *.avi
 *.mov
