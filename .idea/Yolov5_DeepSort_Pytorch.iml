@@ -3,6 +3,10 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/test" />
+      <excludeFolder url="file://$MODULE_DIR$/runs/track/exp" />
+      <excludeFolder url="file://$MODULE_DIR$/runs/track/exp2" />
+      <excludeFolder url="file://$MODULE_DIR$/yolov5/runs/detect" />
+      <excludeFolder url="file://$MODULE_DIR$/yolov5/runs/train" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
