@@ -1,4 +1,4 @@
-import os
+import os, shutil
 from flask import render_template, request, redirect, url_for, abort, send_from_directory
 from werkzeug.utils import secure_filename
 
@@ -28,3 +28,15 @@ def upload_files():
 @app.route('/uploads/<filename>')
 def upload(filename):
     return send_from_directory(app.config['UPLOAD_PATH'], filename)
+
+
+@app.route('/video', methods=["GET", "POST"])
+def uploaded_video1():
+    if request.method == "POST":
+        shutil.rmtree('runs/track/exp', ignore_errors=True)
+        return redirect("/")
+    return render_template('video.html')
+
+
+
+
