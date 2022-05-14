@@ -1,11 +1,8 @@
 import os
-
 from flask import render_template, request, redirect, url_for, abort, send_from_directory
 from werkzeug.utils import secure_filename
 
 from app import app
-
-from DeleteScript import delete_video
 
 
 @app.route('/')
@@ -24,17 +21,10 @@ def upload_files():
             abort(400)
         uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
         os.system(f'python track.py --source uploads/'+filename+' --yolo_model yolov5/runs/train/exp/weights/best.pt --save-vid --save-txt')
+
     return redirect(url_for('index'))
 
 
 @app.route('/uploads/<filename>')
 def upload(filename):
     return send_from_directory(app.config['UPLOAD_PATH'], filename)
-
-
-@app.route('/video')
-def video():
-    def return_to_index():
-        delete_video()
-        return redirect(url_for('index'))
-    return render_template('video.html', rm_btn=return_to_index)
