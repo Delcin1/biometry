@@ -21,7 +21,7 @@ def upload_files():
         if file_ext not in app.config['UPLOAD_EXTENSIONS']:
             abort(400)
         uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename)) # Валуевич: изменил относительный путь на абсолютный
-        os.system(f'./venv/bin/python track.py --source uploads/'+filename+' --yolo_model yolov5/runs/train/exp/weights/best.pt --save-vid --save-txt')
+        os.system(f'python track.py --source uploads/'+filename+' --yolo_model yolov5/runs/train/exp/weights/best.pt --save-vid --save-txt')
         #track.teachpython(f'uploads/'+filename) # вместо верхней строчки лучше использовать эту функцию (смотри track.py)
 
 
@@ -30,7 +30,7 @@ def upload_files():
 
 @app.route('/static/<filename>')
 def upload(filename):
-    return send_from_directory(os.path.abspath(app.config['UPLOAD_PATH']), filename)
+    return send_from_directory(os.path.abspath(app.config['VIDEO_PATH']), filename)
 
 
 @app.route('/video', methods=["GET", "POST"])
