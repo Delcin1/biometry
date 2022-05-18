@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 
 from app import app
 
+import track
 
 @app.route('/')
 def index():
@@ -19,15 +20,17 @@ def upload_files():
         file_ext = os.path.splitext(filename)[1]
         if file_ext not in app.config['UPLOAD_EXTENSIONS']:
             abort(400)
-        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
-        os.system(f'python track.py --source uploads/'+filename+' --yolo_model yolov5/runs/train/exp/weights/best.pt --save-vid --save-txt')
+        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename)) # Валуевич: изменил относительный путь на абсолютный
+        os.system(f'./venv/bin/python track.py --source uploads/'+filename+' --yolo_model yolov5/runs/train/exp/weights/best.pt --save-vid --save-txt')
+        #track.teachpython(f'uploads/'+filename) # вместо верхней строчки лучше использовать эту функцию (смотри track.py)
+
 
     return redirect(url_for('index'))
 
 
-@app.route('/uploads/<filename>')
+@app.route('/static/<filename>')
 def upload(filename):
-    return send_from_directory(app.config['UPLOAD_PATH'], filename)
+    return send_from_directory(os.path.abspath(app.config['UPLOAD_PATH']), filename)
 
 
 @app.route('/video', methods=["GET", "POST"])
