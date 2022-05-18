@@ -23,8 +23,8 @@ def upload_files():
         uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename)) # Валуевич: изменил относительный путь на абсолютный
         os.system(f'python track.py --source uploads/'+filename+' --yolo_model yolov5/runs/train/exp/weights/best.pt --save-vid --save-txt')
         #track.teachpython(f'uploads/'+filename) # вместо верхней строчки лучше использовать эту функцию (смотри track.py)
-
-
+        os.system(f'ffmpeg -y -i runs/track/exp/video.mp4 -c:v h264 runs/track/exp/output.mp4')
+        return redirect(url_for('video'))
     return redirect(url_for('index'))
 
 
@@ -34,7 +34,7 @@ def upload(filename):
 
 
 @app.route('/video', methods=["GET", "POST"])
-def uploaded_video1():
+def video():
     if request.method == "POST":
         shutil.rmtree('runs/track/exp', ignore_errors=True)
         return redirect("/")
