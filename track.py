@@ -1,5 +1,8 @@
 # limit the number of cpus used by high performance libraries
 import os
+
+import dbmodels.model
+
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["OPENBLAS_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
@@ -29,6 +32,8 @@ from yolov5.utils.torch_utils import select_device, time_sync
 from yolov5.utils.plots import Annotator, colors
 from deep_sort.utils.parser import get_config
 from deep_sort.deep_sort import DeepSort
+from dbmodels import model
+
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # yolov5 deepsort root directory
@@ -43,7 +48,7 @@ def detect(opt):
         opt.save_txt, opt.imgsz, opt.evaluate, opt.half, opt.project, opt.name, opt.exist_ok
     webcam = source == '0' or source.startswith('rtsp') or source.startswith('http') or source.endswith('.txt')
 
-    LOGGER.info('test')
+
     # initialize deepsort
     cfg = get_config()
     cfg.merge_from_file(opt.config_deepsort)
@@ -181,10 +186,12 @@ def detect(opt):
                             bbox_top = output[1]
                             bbox_w = output[2] - output[0]
                             bbox_h = output[3] - output[1]
+                            LOGGER.info('try save to db')
+                            dbmodels.model.dbmodel(frame_idx, id, bbox_left, bbox_w, conf)
                             # Write MOT compliant results to file
                             with open(txt_path, 'a') as f:
                                 f.write(('%g ' * 10 + '\n') % (frame_idx + 1, id, bbox_left,  # MOT format
-                                                               bbox_top, bbox_w, bbox_h, -1, -1, -1, -1))
+                                                               bbox_top, bbox_w, bbox_h, -1, -1, -1, conf))
 
                 LOGGER.info(f'{s}Done. YOLO:({t3 - t2:.3f}s), DeepSort:({t5 - t4:.3f}s)')
 

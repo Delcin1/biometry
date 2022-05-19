@@ -1,0 +1,21 @@
+version: '3.1'
+# Use user/example user/password credentials, server: db or localhost, database: biometry
+# docker-compose -f postgres.yml up -d
+#
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: user
+      POSTGRES_DB: biometry
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
