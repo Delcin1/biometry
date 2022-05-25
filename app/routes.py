@@ -1,7 +1,7 @@
 import os, shutil
 from flask import render_template, request, redirect, url_for, abort, send_from_directory
 from werkzeug.utils import secure_filename
-
+from dbmodels import model
 from app import app
 
 import track
@@ -37,6 +37,7 @@ def upload(filename):
 def video():
     if request.method == "POST":
         shutil.rmtree('runs/track/exp', ignore_errors=True)
+        model.delete_data()
         return redirect("/")
     return render_template('video.html')
 
