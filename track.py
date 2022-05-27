@@ -201,21 +201,21 @@ def detect(opt):
 
             # Stream results
             im0 = annotator.result()
-            if show_vid:
-                global count
-                color=(0,255,0)
-                start_point = (0, h-350)
-                end_point = (w, h-350)
-                cv2.line(im0, start_point, end_point, color, thickness=2)
-                thickness = 3
-                org = (150, 150)
-                font = cv2.FONT_HERSHEY_SIMPLEX
-                fontScale = 3
-                cv2.putText(im0, str(count), org, font, 
-                   fontScale, color, thickness, cv2.LINE_AA)
-                cv2.imshow(str(p), im0)
-                if cv2.waitKey(1) == ord('q'):  # q to quit
-                    raise StopIteration
+            # if show_vid:
+            #     global count
+            #     color=(0,255,0)
+            #     start_point = (0, h-350)
+            #     end_point = (w, h-350)
+            #     cv2.line(im0, start_point, end_point, color, thickness=2)
+            #     thickness = 3
+            #     org = (150, 150)
+            #     font = cv2.FONT_HERSHEY_SIMPLEX
+            #     fontScale = 3
+            #     cv2.putText(im0, str(count), org, font,
+            #        fontScale, color, thickness, cv2.LINE_AA)
+            #     cv2.imshow(str(p), im0)
+            #     if cv2.waitKey(1) == ord('q'):  # q to quit
+            #         raise StopIteration
 
             # Save results (image with detections)
             if save_vid:

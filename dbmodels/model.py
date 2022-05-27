@@ -5,7 +5,7 @@ from datetime import datetime
 from sqlalchemy.orm import Session, sessionmaker
 
 
-engine = create_engine("postgresql://user:example@localhost/biometry")
+engine = create_engine("postgresql://user:example@db/biometry")
 engine.connect()
 
 
