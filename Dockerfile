@@ -1,6 +1,6 @@
 # create docker image for our app docker build --tag biometry .
 # run app: docker compose up
-FROM python:3.8
+FROM ubuntu:latest
 
 RUN apt-get update
 #RUN apt-get install ffmpeg libsm6 libxext6  -y
@@ -14,12 +14,14 @@ RUN apt-get update
 #RUN ln -s libcrypto.so.1.0.0 libcrypto.so.10
 ENV LD_LIBRARY_PATH=/usr/local/lib
 COPY --from=jrottenberg/ffmpeg /usr/local /usr/local/
-
-RUN apt-get install -y libqt5gui5 && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt install -y python3-pip
+RUN alias python=python3
+#RUN apt-get install -y libqt5gui5 && \
+    #rm -rf /var/lib/apt/lists/*
 ENV QT_DEBUG_PLUGINS=1
 
 COPY . .
+RUN python3 -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 EXPOSE 5000
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
