@@ -1,17 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <video width="800px" controls>
-        <source src="{{ url_for('static', filename='output.mp4')}}">
-    </video>
-    <div>
-        <form method="post">
-            <input type="submit" name="submit_button" value="delete">
-        </form>
-    </div>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Обработанное видео</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="p-3 mb-2 text-white">
+            <h1 class="text-center">Обработанное видео</h1>
+            <video width="800px" controls>
+                <source src="{{ url_for('static', filename='output.mp4')}}">
+            </video>
+            <form method="post">
+                <input type="submit" class="btn btn-light btn-sm" value="Удалить">
+            </form>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        </div>  
+    </body>
 </html>

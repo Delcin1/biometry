@@ -1,31 +1,31 @@
-version: '3.8'
+version: '3.3'
 
 services:
-  web:
-    container_name: web_app
-    image: biometry
-    build: .
-    ports:
-      - "5000:5000"
-    depends_on:
-      - db
-    environment:
-      - DISPLAY=$DISPLAY
-    volumes:
-      - '/tmp/.X11-unix:/tmp/.X11-unix'
-      - '/etc/localtime:/etc/localtime:ro'
-      - ./uploads:/uploads
+  #web:
+    #container_name: web_app
+    #image: biometry
+    #build: .
+    #ports:
+      #- "5000:5000"
+    #depends_on:
+      #- db
+    #environment:
+      #- DISPLAY=$DISPLAY
+    #volumes:
+      #- '/tmp/.X11-unix:/tmp/.X11-unix'
+      #- '/etc/localtime:/etc/localtime:ro'
+      #- ./uploads:/uploads
 
   db:
     container_name: db
-    image: postgres:14
+    image: postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: example
       POSTGRES_USER: user
       POSTGRES_DB: biometry
     ports:
-      - 5432:5432
+      - 2712:2712
 
   adminer:
     image: adminer
